@@ -32,13 +32,13 @@ module.exports = {
         config.optimization.splitChunks({
             chunks: 'all'
           })
-          // 用cdn方式引入
-          config.externals({
-            'vue': 'Vue',
-            'vuex': 'Vuex',
-            'vue-router': 'VueRouter',
-            'axios': 'axios'
-          })
+        // 用cdn方式引入
+        config.externals({
+        'vue': 'Vue',
+        'vuex': 'Vuex',
+        'vue-router': 'VueRouter',
+        'axios': 'axios'
+        })
     },
     devServer: {
         proxy: {
@@ -50,5 +50,5 @@ module.exports = {
     },
     assetsDir: 'assets',
     publicPath: './',
-    lintOnSave: true
+    lintOnSave: false
 }
