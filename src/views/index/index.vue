@@ -1,21 +1,18 @@
 <template>
     <div>
-        <china-map></china-map>
     </div>
-    
 </template>
 <script>
-import ChinaMap from '../../components/chinaMap.vue'
 export default {
     data() {
         return {
         }
     },
     components: {
-        ChinaMap
+    },
+    mounted() {
     }
 }
 </script>
 <style scoped>
-
 </style>

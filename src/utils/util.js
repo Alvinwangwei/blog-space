@@ -51,3 +51,9 @@ export function removeToken() {
     Cookies.remove(tokenKey)
 }
 
+
+// 字符串去空格
+
+export function deleteSpace (str) {
+    return str.replace(/\s+/g, '')
+}
