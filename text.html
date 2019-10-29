@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- <div id="app">
+        {{message}}
+    </div> -->
+</body>
+<script>
+//    let bbb = new Vue({
+//        el: '#app',
+//        data: {
+//             message: 'hello world'
+//        }
+//    })
+    let fn = function () {
+        Object.defineProperty(this, 'name', {
+            get: function() {
+                return 'fn-get'
+            },
+            set: function() {
+                this.age = 'fn-set'
+            }
+        })
+    }
+    let o = new fn()
+    console.log(o.name)
+    // o.name = 'hello'
+    // console.log(o.name)
+    // console.log(o.age)
+
+</script>
+</html>
