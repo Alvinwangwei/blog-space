@@ -1,6 +1,7 @@
 <template>
 
     <div id="box">
+        <input type="text" placeholder="aaa" v-focus>
     </div>
 
 </template>
@@ -14,6 +15,22 @@ export default {
     },
     mounted() {
         this.$tip('bbbb')
+    },
+    directives: {
+        'focus': {
+            bind(el) {
+                console.log('bind')
+            },
+            inserted(el) {
+                // console.log('inserted', el)
+                el.onfocus = function () {
+                    console.log('tyyyyy')
+                }
+            },
+            update(el) {
+                console.log('update')
+            }
+        }
     },
     methods: {
         sort(arr) {
