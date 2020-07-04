@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style scoped>
 .ToastBox {
   position: fixed;
   background: rgba(0, 0, 0, .7);
