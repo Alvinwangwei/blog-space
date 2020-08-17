@@ -2,11 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import Tip from './common/Toast/toast'
+import Toast from './common/Toast/toast'
 
-Vue.use(Tip)
+Vue.use(Toast)
 
 Vue.config.productionTip = false
+
+
 
 var app = new Vue({
   router,
