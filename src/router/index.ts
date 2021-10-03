@@ -1,10 +1,15 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '@/views/home/index.vue'
-import BasicLayout from '@/layout/BasicLayout.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import BasicLayout from '@/layout/BasicLayout.vue';
+import Home from '@/views/home/index.vue';
+import Article from '@/views/article/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/home',
+    path: '/',
+    redirect: '/blog/index',
+  },
+  {
+    path: '/blog',
     name: 'Home',
     component: BasicLayout,
     children: [
@@ -12,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'index',
         name: 'Home',
         component: Home,
+      },
+      {
+        path: 'article',
+        name: 'Article',
+        component: Article,
       }
     ]
   }
