@@ -31,24 +31,26 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import BlogInfo from '@/components/BlogInfo.vue';
 import { useRouter } from 'vue-router';
+import { getArticleList } from '@/api/article'
 
-const getArticleList: any[] = [
-  {
-    id: 1,
-    title: '如何将 Vue2 代码一键转成 Vue3 代码',
-    createTime: '2021-10-01',
-  },
-  {
-    id: 2,
-    title: '如何将 Vue2 代码一键转成 Vue3 代码',
-    createTime: '2021-10-01',
-  },
-  {
-    id: 3,
-    title: '如何将 Vue2 代码一键转成 Vue3 代码',
-    createTime: '2021-10-01',
-  }
-]
+// const getArticleList: any[] = [
+//   {
+//     id: 1,
+//     title: '如何将 Vue2 代码一键转成 Vue3 代码',
+//     createTime: '2021-10-01',
+//   },
+//   {
+//     id: 2,
+//     title: '如何将 Vue2 代码一键转成 Vue3 代码',
+//     createTime: '2021-10-01',
+//   },
+//   {
+//     id: 3,
+//     title: '如何将 Vue2 代码一键转成 Vue3 代码',
+//     createTime: '2021-10-01',
+//   }
+// ]
+
 
 interface IArticle {
   title: string;
@@ -75,8 +77,14 @@ export default defineComponent({
       })
     }
 
+    const onGetArticleList = async() => {
+      const res = await getArticleList({});
+      // console.log(res);
+    }
+
     onMounted(() => {
-      articleList.value = getArticleList.concat(getArticleList);
+      // articleList.value = getArticleList.concat(getArticleList);
+      onGetArticleList();
     })
     return {
       bannerImg: bannerImgs[0],

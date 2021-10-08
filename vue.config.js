@@ -47,7 +47,15 @@ module.exports = {
   },
   devServer: {
     // 指向开发环境 API 服务器
-    proxy: '',
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:7001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
   },
   parallel: require('os').cpus().length > 1,
 
