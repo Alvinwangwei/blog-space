@@ -7,7 +7,6 @@ export class VAxious {
 
   constructor(options: any) {
     this.options = options;
-    console.log('options', this.options);
     this.axiosInstance = axios.create(options);
     this.setupInterceptors();
   }

@@ -5,7 +5,7 @@
       <div class="home-header__banner" :style="{ backgroundImage: `url(${bannerImg})`}">
         <div class="avatar"></div>
         <div class="desc-wrapper">
-          <div class="desc">把你的脸迎朝阳光</div>
+          <!-- <div class="desc">把你的脸迎朝阳光</div> -->
           <div class="subDesc">Have a nice day</div>
         </div>
       </div>
@@ -51,7 +51,6 @@ import { getArticleList } from '@/api/article'
 //   }
 // ]
 
-
 interface IArticle {
   title: string;
   createTime: string;
@@ -79,11 +78,10 @@ export default defineComponent({
 
     const onGetArticleList = async() => {
       const res = await getArticleList({});
-      // console.log(res);
+      console.log(res);
     }
 
     onMounted(() => {
-      // articleList.value = getArticleList.concat(getArticleList);
       onGetArticleList();
     })
     return {

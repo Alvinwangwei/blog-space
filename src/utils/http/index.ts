@@ -1,18 +1,14 @@
-import { VAxious } from './Axios'
-import { deepMerge } from '@/utils/index';
+import { VAxious } from './Axios';
 
-function createAxios(opt?: any) {
+function createAxios(opt: any = {}) {
   return new VAxious(
-    deepMerge(
-      {
-        baseURL: '',
-        timeout: 10 * 1000,
-        cancelToken: '',
-        // 忽略重复请求
-        ignoreCancelToken: true,
-      }, 
-      opt || {},
-    )
+    {
+      baseURL: '/api',
+      timeout: 10 * 1000,
+      cancelToken: '',
+      ignoreCancelToken: true,
+      ...opt,
+    },
   );
 }
 

@@ -46,10 +46,12 @@ module.exports = {
     loaderOptions: {},
   },
   devServer: {
+    host: 'wangwei.com',
+    port: '8080',
     // 指向开发环境 API 服务器
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:7001',
+        target: 'http://wangwei.com:7001',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
@@ -58,6 +60,5 @@ module.exports = {
     },
   },
   parallel: require('os').cpus().length > 1,
-
   pluginOptions: {},
 }
