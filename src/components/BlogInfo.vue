@@ -8,7 +8,7 @@
     <div class="statistics">
       <div class="article statistic-item">
         <div class="statistic-title">文章</div>
-        <div class="statistics-number">0</div>
+        <div class="statistics-number">{{ articleNum }}</div>
       </div>
       <div class="tag statistic-item">
         <div class="statistic-title">标签</div>
@@ -26,6 +26,12 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'BlogInfo',
   components: {},
+  props: {
+    articleNum: {
+      type: Number,
+      default: 0,
+    }
+  },
   setup() {
     return {
     };

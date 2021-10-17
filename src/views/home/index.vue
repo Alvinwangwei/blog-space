@@ -5,7 +5,6 @@
       <div class="home-header__banner" :style="{ backgroundImage: `url(${bannerImg})`}">
         <div class="avatar"></div>
         <div class="desc-wrapper">
-          <!-- <div class="desc">把你的脸迎朝阳光</div> -->
           <div class="subDesc">Have a nice day</div>
         </div>
       </div>
@@ -15,12 +14,12 @@
       <div class="article-box">
         <a-card v-for="item in articleList" :key="item.id" class="article-item">
           <div class="article-title" @click="onViewDetail(item)">{{ item.title }}</div>
-          <div class="article-date">{{ item.createTime }}</div>
+          <div class="article-date">{{ item.time }}</div>
         </a-card>
       </div>
       <div class="blog-info">
         <a-card style="width: 300px">
-          <BlogInfo />
+          <BlogInfo :articleNum="articleList.length" />
         </a-card>
       </div>
     </div>
@@ -28,32 +27,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue';
 import BlogInfo from '@/components/BlogInfo.vue';
 import { useRouter } from 'vue-router';
 import { getArticleList } from '@/api/article'
 
-// const getArticleList: any[] = [
-//   {
-//     id: 1,
-//     title: '如何将 Vue2 代码一键转成 Vue3 代码',
-//     createTime: '2021-10-01',
-//   },
-//   {
-//     id: 2,
-//     title: '如何将 Vue2 代码一键转成 Vue3 代码',
-//     createTime: '2021-10-01',
-//   },
-//   {
-//     id: 3,
-//     title: '如何将 Vue2 代码一键转成 Vue3 代码',
-//     createTime: '2021-10-01',
-//   }
-// ]
-
 interface IArticle {
   title: string;
   createTime: string;
+}
+
+interface IHomeState {
+  articleList: any[];
 }
 
 export default defineComponent({
@@ -62,10 +47,12 @@ export default defineComponent({
     BlogInfo,
   },
   setup() {
-     const router = useRouter()
+    const router = useRouter()
     const bannerImgs = ['https://wallpaper.infinitynewtab.com/wallpaper/1762.jpg']
 
-    let articleList = ref<IArticle[]>([]);
+    const homeState = reactive<IHomeState>({
+      articleList: [],
+    })
 
     const onViewDetail = (item: any) => {
       router.push({
@@ -78,15 +65,21 @@ export default defineComponent({
 
     const onGetArticleList = async() => {
       const res = await getArticleList({});
-      console.log(res);
+      homeState.articleList = (res as any[]).map((item) => {
+        return {
+          id: item.article_id,
+          title: item.article_title,
+          time: item.create_time,
+        }
+      });
     }
 
     onMounted(() => {
       onGetArticleList();
     })
     return {
+      ...toRefs(homeState),
       bannerImg: bannerImgs[0],
-      articleList,
       onViewDetail,
     }
   }

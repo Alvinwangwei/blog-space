@@ -13,7 +13,9 @@ export class VAxious {
 
   setupInterceptors() {
     // this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {})
-    // this.axiosInstance.interceptors.response.use((res: AxiosResponse) => {})
+    this.axiosInstance.interceptors.response.use((res: AxiosResponse) => {
+      return res.data
+    })
   }
 
   get(config: any, options?: any) {

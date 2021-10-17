@@ -3,37 +3,43 @@
     <div class="content">
       <div class="article-info">
         <div class="article-title">
-          <div>{{ articleState.title }}</div> 
+          <div>{{ articleInfo.title }}</div> 
         </div>
 
         <div class="article-desc">
-          <span class="article-desc__date">{{ articleState.date }}</span>
+          <span class="article-desc__date">{{ articleInfo.date }}</span>
           <span>
             <EyeOutlined class="article-desc__icon" />
-            <span class="article-desc__times">0</span>
+            <span class="article-desc__times">{{ articleInfo.views }}</span>
           </span>
         </div>
 
         <div class="article-content">
-          <div v-html="articleState.content"></div>
+          <div v-html="articleInfo.content"></div>
         </div>
       </div>
 
-      <div class="article-catalogue">
+      <!-- <div class="article-catalogue">
           <div class="article-catalogue__title">目录</div>
           <ul>
             <li>指令</li>
             <li>混入</li>
             <li>表单验证</li>
           </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from 'vue';
- import { EyeOutlined } from '@ant-design/icons-vue';
+import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue';
+import { EyeOutlined } from '@ant-design/icons-vue';
+import { getArticleInfo } from '@/api/article';
+import { useRoute } from 'vue-router';
+
+interface IArticleState {
+  articleInfo: any;
+}
 
 export default defineComponent({
   name: 'Article',
@@ -41,15 +47,34 @@ export default defineComponent({
     EyeOutlined,
   },
   setup() {
-    const articleState = reactive({
-      title: '组件库源码中这些写法你掌握了吗？',
-      date: '2020/07/14 10:02:59',
-      content: '<div>content</div>'
+    const articleState = reactive<IArticleState>({
+      articleInfo: {
+        title: '',
+        date: '',
+        content: '', 
+        views: 0,
+      },
     })
+
+    const route = useRoute();
+    const loadArticleInfo = async() => {
+      const params = {
+        id: route.query.id
+      };
+      const res: any = await getArticleInfo(params);
+      articleState.articleInfo = {
+        title: res.article_title,
+        date: res.create_time,
+        content: res.article_content, 
+        views: res.article_views,
+      };
+    }
+
     onMounted(() => {
+      loadArticleInfo();
     })
     return {
-      articleState,
+      ...toRefs(articleState),
     }
   }
 });
