@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import BasicLayout from '@/layout/BasicLayout.vue';
+import AdminLayout from '@/layout/AdminLayout.vue';
 import Home from '@/views/home/index.vue';
 import Article from '@/views/article/index.vue';
+import SettingArticle from '@/views/setting/article/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,6 +25,18 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Article',
         component: Article,
       }
+    ]
+  },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: AdminLayout,
+    children: [
+      {
+        path: 'article',
+        name: 'settingArticle',
+        component: SettingArticle,
+      },
     ]
   }
 ]

@@ -12,35 +12,40 @@ export class VAxious {
   }
 
   setupInterceptors() {
-    // this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {})
     this.axiosInstance.interceptors.response.use((res: AxiosResponse) => {
       return res.data
     })
   }
 
-  get(config: any, options?: any) {
-    return this.request({...config,methods: 'GET'}, options);
-  }
-
-  post(config: any, options?: any) {
-    return this.request({...config, methods: 'POST'}, options);
-  }
-
-  request(config: any, options?: any) {
-    let conf = {
-      ...config,
-      ...this.options
-    }
+  get(config: any) {
+    // return this.request({...config,methods: 'GET'});
     return new Promise((resolve, reject) => {
-      this.axiosInstance
-        .request(conf)
-        .then((res: AxiosResponse) => {
-          resolve(res);
-        })
-        .catch((err: AxiosError) => {
-          reject(err || new Error('request error!'));
-        })
+      this.axiosInstance({
+        ...config,
+        method: 'get',
+      })
+      .then((res: AxiosResponse) => {
+        resolve(res);
+      })
+      .catch((err: AxiosError) => {
+        reject(err || new Error('request error!'));
+      })
     })
   }
 
+  post(config: any) {
+    return new Promise((resolve, reject) => {
+      this.axiosInstance({
+        ...config,
+        method: 'post',
+        data: config.params
+      })
+      .then((res: AxiosResponse) => {
+        resolve(res);
+      })
+      .catch((err: AxiosError) => {
+        reject(err || new Error('request error!'));
+      })
+    })
+  }
 }
