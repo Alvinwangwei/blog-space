@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  /**
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number[]}
+   */
+  var intersect = function(nums1, nums2) {
+    let shortArr = [], longArr = [];
+    if(nums1.length < nums2.length) {
+      shortArr = nums1;
+      longArr = nums2;
+    } else {
+      shortArr = nums2;
+      longArr = nums1;
+    }
+    let ret = [];
+    console.log(shortArr, longArr);
+    for(let i = 0; i < shortArr.length; i++) {
+      for(let j = 0; j < longArr.length; j++) {
+        if(shortArr[i] === longArr[j]) {
+          ret.push(shortArr[i]);
+          break;
+        }
+      }
+    }
+    return ret;
+
+  };
+  console.log(intersect([1,2], [1,1]));
+  </script>
+</body>
+</html>
